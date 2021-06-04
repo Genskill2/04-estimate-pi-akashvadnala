@@ -1,32 +1,15 @@
+
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 
+float mc_pi(int);
+
 float frandom() {
   long int q = random();
   float ret = (float)q/(float)RAND_MAX;
   return ret;
-}
-
-float mc_pi(int i)
-{
-    int inside = 0;
-    float distance;
-    float ratio;
-    float x,y;
-    for(int n=0; n<i;n++)
-    {
-        x = frandom();
-        y = frandom();
-        distance = sqrt( (x*x) + (y*y) );
-        if(distance <= 1.0){
-            inside+=1;
-        }
-    }
-    ratio = (float)inside/(float)i;
-    ratio *= 4;
-    return ratio;
 }
 
 int main(void) {
@@ -35,7 +18,6 @@ int main(void) {
   
   pi0 = mc_pi(25000);
   pi1 = mc_pi(25000);
-  printf("%f %f\n", pi0, pi1);
   
   if (pi0 == pi1) {
       printf("Two separate estimates of pi are exactly the same. This is unlikely.\n");
@@ -55,4 +37,20 @@ int main(void) {
       abort();
     }
   }
+}
+
+float mc_pi(int n){
+	int points_in_circle=0;
+	float x,y;
+  	float pi,distance;
+	for(int i=0;i<n;i++){
+		x=frandom();
+		y=frandom();
+		distance=sqrt(pow(x,2)+pow(y,2));
+		if(distance<=1){
+			points_in_circle+=1;
+		}
+	}
+	pi=(float)points_in_circle/(float)n;
+	return 4*pi;
 }
