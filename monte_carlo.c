@@ -39,5 +39,25 @@ int main(void) {
   }
 }
 
+float mc_pi(int n)
+{
+    int inside = 0;
+    float distance;
+    float ratio;
+    float x,y;
+    for(int i=0; n<n;i++)
+    {
+        x = frandom();
+        y = frandom();
+        distance = sqrt( (x*x) + (y*y) );
+        if(distance <= 1.0){
+            inside+=1;
+        }
+    }
+    ratio = (float)inside/(float)n;
+    ratio *= 4;
+    return ratio;
+}
+
 
 
